@@ -51,7 +51,10 @@ public class MoradorService {
 		morador.setIsProprietario(moradorDTO.getIsProprietario());
 		morador.setDataEntrada(moradorDTO.getDataEntrada());
 
-		Imovel imovel = imovelRepository.getReferenceById(moradorDTO.getImovel().getId());		
+		//Imovel imovel = imovelRepository.getReferenceById(moradorDTO.getImovel().getId());
+		Imovel imovel = imovelRepository.findById(moradorDTO.getImovel().getId())
+		        .orElseThrow(() -> new ResourceNotFoundException("Imóvel não encontrado: " + moradorDTO.getImovel().getId() + "."));
+
 		morador.setImovel(imovel);
 		
 		morador = moradorRepository.save(morador);
