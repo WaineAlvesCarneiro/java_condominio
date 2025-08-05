@@ -1,6 +1,7 @@
 package com.wa.java_condominio.services;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,6 +20,12 @@ import com.wa.java_condominio.services.exceptions.ResourceNotFoundException;
 public class ImovelService {
 	@Autowired
 	private ImovelRepository imovelRepository;
+	
+	@Transactional(readOnly = true)
+	public List<ImovelDTO> findAll() {
+		List<Imovel> lista = imovelRepository.findAll();
+		return lista.stream().map(ImovelDTO::new).toList();
+	}
 	
 	@Transactional(readOnly = true)
 	public Page<ImovelDTO> findAllPaged(PageRequest pageRequest) {

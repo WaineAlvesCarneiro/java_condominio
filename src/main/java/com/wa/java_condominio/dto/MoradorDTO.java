@@ -36,6 +36,8 @@ public class MoradorDTO implements Serializable{
     
     @NotNull(message = "Imóvel é obrigatório.")
 	private ImovelDTO imovel;
+    
+    private Long imovelId;
 
 	public MoradorDTO() {
 	}
@@ -68,6 +70,7 @@ public class MoradorDTO implements Serializable{
 	public MoradorDTO(Morador morador, Imovel imovel) {
 	    this(morador);
 	    this.imovel = new ImovelDTO(imovel);
+	    this.imovelId = imovel.getId();
 	}
 	
 	public Long getId() {
@@ -141,4 +144,13 @@ public class MoradorDTO implements Serializable{
 	public void setImovel(ImovelDTO imovel) {
 		this.imovel = imovel;
 	}
+	
+	public Long getImovelId() {
+	    return imovelId;
+	}
+
+	public void setImovelId(Long imovelId) {
+	    this.imovelId = imovelId;
+	}
+
 }

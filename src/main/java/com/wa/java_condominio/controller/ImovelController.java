@@ -1,6 +1,7 @@
 package com.wa.java_condominio.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,9 +34,17 @@ public class ImovelController {
 	@Autowired
 	private ImovelService imovelService;
 	
-	@Operation(summary = "Lista todos os imoveis com paginação.")
+	@Operation(summary = "Lista todos os imóveis.")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso.") })	
 	@GetMapping
+	public ResponseEntity<List<ImovelDTO>> findAll() {
+		List<ImovelDTO> imoveis = imovelService.findAll();
+		return ResponseEntity.ok().body(imoveis);
+	}
+
+	@Operation(summary = "Lista todos os imoveis com paginação.")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso.") })	
+	@GetMapping("/paginado")
 	public ResponseEntity<Page<ImovelDTO>> findAllPaged(
 			@RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "10") Integer linesPerPage,
