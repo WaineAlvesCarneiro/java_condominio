@@ -34,7 +34,7 @@ public class ImovelController {
 	@Autowired
 	private ImovelService imovelService;
 	
-	@Operation(summary = "Lista todos os imóveis.")
+	@Operation(summary = "Lista todos os imoveis.")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso.") })	
 	@GetMapping
 	public ResponseEntity<List<ImovelDTO>> findAll() {
@@ -58,10 +58,10 @@ public class ImovelController {
 		return ResponseEntity.ok().body(imovelDTO);
 	}
 	
-	@Operation(summary = "Busca um imovel por ID.")
+	@Operation(summary = "Busca um imóvel por ID.")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Imovel encontrado com sucesso."),
-			@ApiResponse(responseCode = "404", description = "Imovel não encontrado.")
+			@ApiResponse(responseCode = "200", description = "Imóvel encontrado com sucesso."),
+			@ApiResponse(responseCode = "404", description = "Imóvel não encontrado.")
 	})
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ImovelDTO> findById(@PathVariable long id){
@@ -70,9 +70,9 @@ public class ImovelController {
 		return ResponseEntity.ok().body(imovelDTO);
 	}
 	
-	@Operation(summary = "Cadastrar um Imovel.")
+	@Operation(summary = "Cadastrar um Imóvel.")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "201", description = "Imovel criado com sucesso.")
+			@ApiResponse(responseCode = "201", description = "Imóvel criado com sucesso.")
 	})
 	@PostMapping
 	public ResponseEntity<ImovelDTO> saveImovel(@RequestBody @Valid ImovelDTO imovelDTO){
@@ -84,10 +84,10 @@ public class ImovelController {
 		return ResponseEntity.created(uri).body(imovelDTO);
 	}
 	
-	@Operation(summary = "Atualiza os dados do imovel existente.")
+	@Operation(summary = "Atualiza os dados do imóvel existente.")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Imovel autlizado com sucesso."),
-			@ApiResponse(responseCode = "404", description = "Imovel não encontrado.")
+			@ApiResponse(responseCode = "200", description = "Imóvel autlizado com sucesso."),
+			@ApiResponse(responseCode = "404", description = "Imóvel não encontrado.")
 	})
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ImovelDTO> updateImovel(@PathVariable long id, @RequestBody @Valid ImovelDTO imovelDTO){
@@ -96,10 +96,10 @@ public class ImovelController {
 		return ResponseEntity.ok().body(imovelDTO);
 	}
 	
-	@Operation(summary = "Deleta imovel existente por ID.")
+	@Operation(summary = "Deleta imóvel existente por ID.")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Imovel deletado com sucesso."),
-			@ApiResponse(responseCode = "404", description = "Imovel não encontrado.")
+			@ApiResponse(responseCode = "200", description = "Imóvel deletado com sucesso."),
+			@ApiResponse(responseCode = "404", description = "Imóvel não encontrado.")
 	})
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ImovelDTO> deleteImovel(@PathVariable long id){

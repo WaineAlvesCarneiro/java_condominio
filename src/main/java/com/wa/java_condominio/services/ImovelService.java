@@ -73,7 +73,7 @@ public class ImovelService {
 			imovelRepository.deleteById(id);
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new DatabaseException("Não foi possível excluir o imovel. Pois pode estar vinculado a outro registro.");
+			throw new DatabaseException("Não foi possível excluir o imóvel. Pois pode estar vinculado a outro registro.");
 		}
 	}
 }

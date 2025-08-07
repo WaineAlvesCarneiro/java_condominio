@@ -87,7 +87,7 @@ public class MoradorService {
 		try {
 			moradorRepository.deleteById(id);			
 		} catch (DataIntegrityViolationException e) {
-			throw new DatabaseException("Não foi possível excluir a produto. Pois pode estar vinculada a outros regristros.");
+			throw new DatabaseException("Não foi possível excluir a morador. Pois pode estar vinculada a outros regristros.");
 		}
 	}
 }
