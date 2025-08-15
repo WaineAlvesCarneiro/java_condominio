@@ -1,0 +1,75 @@
+Passo a passo para configurar HTTPS no Maven + Spring Boot
+1. Gerar o certificado SSL (self-signed)
+Abra seu terminal e rode:
+
+keytool -genkeypair -alias meu-certificado -keyalg RSA -keysize 2048 -validity 365 -keystore meu-keystore.jks
+keytool -export -alias meu-certificado -file meu-certificado.crt -keystore src/main/resources/meu-keystore.jks
+
+Guarde a senha que você escolher.
+
+Esse arquivo meu-keystore.jks deve ir na pasta src/main/resources do seu projeto (ou em algum lugar acessível).
+
+2. Configurar o application.properties ou application.yml
+No seu projeto Maven (Spring Boot), configure o arquivo para usar HTTPS:
+
+Se for .properties:
+
+server.port=8443
+server.ssl.key-store=classpath:meu-keystore.jks
+server.ssl.key-store-password=suaSenhaAqui
+server.ssl.key-password=suaSenhaAqui
+server.ssl.key-store-type=JKS
+
+Se for .yml:
+
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:meu-keystore.jks
+    key-store-password: suaSenhaAqui
+    key-password: suaSenhaAqui
+    key-store-type: JKS
+3. Rodar a aplicação com Maven
+No terminal dentro da pasta do projeto, execute:
+
+mvn spring-boot:run
+Sua API Java estará rodando com HTTPS em https://localhost:8443.
+
+4. Exportar o certificado para importar no navegador
+Para evitar erro SSL no Angular (browser), exporte o certificado público:
+
+keytool -export -alias meu-certificado -file meu-certificado.crt -keystore src/main/resources/meu-keystore.jks
+Agora importe o arquivo meu-certificado.crt nas autoridades confiáveis do navegador.
+
+5. Ajustar o Angular para consumir a API HTTPS
+No Angular, no arquivo environment.ts (ou environment.prod.ts), aponte a URL da API para https://localhost:8443.
+
+Se estiver dando erro de CORS, ajuste o backend para liberar seu domínio Angular (exemplo):
+
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+public class MeuController {
+   // endpoints aqui
+}
+
+
+Ficou assim 
+
+spring.application.name=java_condominio
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/java_condominio
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+
+spring.jpa.open-in-view=false
+
+server.port=44369
+server.ssl.key-store=classpath:meu-keystore.jks
+server.ssl.key-store-password=ssl123
+server.ssl.key-password=ssl123
+server.ssl.key-store-type=JKS
+server.ssl.key-alias=meu-certificado
+
+spring.jpa.properties.hibernate.jdbc.time_zone=UTC
